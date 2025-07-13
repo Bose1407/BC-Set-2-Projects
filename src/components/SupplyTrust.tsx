@@ -211,7 +211,13 @@ export function SupplyTrust() {
 
       const productStages = await contract.getProductStages(searchProductId);
       console.log('Fetched productStages:', productStages);
-      setStages(productStages);
+      const [, handlers, descriptions, timestamps] = productStages;
+      const stagesArray = handlers.map((handler, i) => ({
+        handler,
+        description: descriptions[i],
+        timestamp: timestamps[i],
+      }));
+      setStages(stagesArray);
       
       if (productStages.length === 0) {
         toast.info('No stages found for this product');
