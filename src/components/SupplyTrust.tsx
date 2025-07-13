@@ -210,6 +210,7 @@ export function SupplyTrust() {
       if (!contract) return;
 
       const productStages = await contract.getProductStages(searchProductId);
+      console.log('Fetched productStages:', productStages);
       setStages(productStages);
       
       if (productStages.length === 0) {
