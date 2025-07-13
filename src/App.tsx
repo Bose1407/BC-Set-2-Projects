@@ -41,8 +41,8 @@ function App() {
         <footer className="bg-gray-800 text-white py-8 mt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-gray-300">
-              Built with React, Ethers.js, and Tailwind CSS for Web3 contract interaction
-            </p>
+               Developed by <a href="https://www.knotcodz.com/" className="text-green-400 hover:text-green-500">Knot Codz 💚</a>
+              </p>
           </div>
         </footer>
       </div>
