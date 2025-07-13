@@ -4,254 +4,23 @@ import { useWeb3 } from '../contexts/Web3Context';
 import { parseEther, formatEther } from 'ethers';
 import toast from 'react-hot-toast';
 
-// You'll need to replace this with your actual contract ABI
+// Updated ABI for EduFund contract
 const EDU_FUND_ABI = [
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "studentName",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "goal",
-				"type": "uint256"
-			}
-		],
-		"name": "CampaignCreated",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "reason",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "goal",
-				"type": "uint256"
-			}
-		],
-		"name": "createCampaign",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			}
-		],
-		"name": "donate",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "donor",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Donated",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			}
-		],
-		"name": "withdraw",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Withdrawn",
-		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "campaignId",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "campaigns",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "studentName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "reason",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "goal",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "raised",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "withdrawn",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "donations",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			}
-		],
-		"name": "getCampaign",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "studentName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "reason",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "goal",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "raised",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "withdrawn",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
+  {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"string","name":"studentName","type":"string"},{"indexed":false,"internalType":"uint256","name":"goal","type":"uint256"}],"name":"CampaignCreated","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"address","name":"donor","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Donated","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Withdrawn","type":"event"},
+  {"inputs":[],"name":"campaignId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"campaigns","outputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"string","name":"studentName","type":"string"},{"internalType":"string","name":"reason","type":"string"},{"internalType":"uint256","name":"goal","type":"uint256"},{"internalType":"uint256","name":"raised","type":"uint256"},{"internalType":"bool","name":"withdrawn","type":"bool"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"reason","type":"string"},{"internalType":"uint256","name":"goal","type":"uint256"}],"name":"createCampaign","outputs":[],"stateMutability":"nonpayable","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"donate","outputs":[],"stateMutability":"payable","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"donations","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"getCampaign","outputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"string","name":"studentName","type":"string"},{"internalType":"string","name":"reason","type":"string"},{"internalType":"uint256","name":"goal","type":"uint256"},{"internalType":"uint256","name":"raised","type":"uint256"},{"internalType":"bool","name":"withdrawn","type":"bool"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getUserCampaignIds","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"userCampaigns","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}
 ];
 
-const EDU_FUND_ADDRESS = "0x9F666E96eF0924841d7C7bFad24aF4d7968775f6"; // Replace with your deployed contract address
+const EDU_FUND_ADDRESS = "0x8375E21014B0c037013c565f7d20805f71D0b17e"; // Replace with your deployed contract address
 
 interface Campaign {
   owner: string;
@@ -272,6 +41,10 @@ export function EduFund() {
   const [searchCampaignId, setSearchCampaignId] = useState('');
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [loading, setLoading] = useState(false);
+  // Add state for user campaign IDs
+  const [userCampaignIds, setUserCampaignIds] = useState<number[]>([]);
+  // Add state for user campaign details
+  const [userCampaignDetails, setUserCampaignDetails] = useState<any[]>([]);
 
   const createCampaign = async () => {
     if (!isConnected) {
@@ -408,12 +181,92 @@ export function EduFund() {
     return Math.min(Number((raised * 100n) / goal), 100);
   };
 
+  // Add a function to fetch campaign IDs for the connected user
+  const fetchUserCampaignIds = async () => {
+    if (!isConnected || !account) {
+      toast.error('Please connect your wallet first');
+      return;
+    }
+    setLoading(true);
+    try {
+      const contract = getContract(EDU_FUND_ADDRESS, EDU_FUND_ABI);
+      if (!contract) return;
+      const ids = await contract.getUserCampaignIds(account);
+      setUserCampaignIds(ids.map((id: any) => Number(id)));
+      // Fetch details for each campaign
+      const details = await Promise.all(
+        ids.map(async (id: any) => {
+          const c = await contract.getCampaign(Number(id));
+          return {
+            id: Number(id),
+            owner: c[0],
+            studentName: c[1],
+            reason: c[2],
+            goal: c[3],
+            raised: c[4],
+            withdrawn: c[5],
+          };
+        })
+      );
+      setUserCampaignDetails(details);
+      toast.success('Fetched your campaign IDs and details');
+    } catch (error: any) {
+      console.error('Error fetching user campaign IDs:', error);
+      toast.error('Failed to fetch your campaign IDs');
+      setUserCampaignIds([]);
+      setUserCampaignDetails([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="space-y-8">
       <div className="text-center">
         <GraduationCap className="h-12 w-12 text-green-500 mx-auto mb-4" />
         <h2 className="text-3xl font-bold text-gray-900 mb-2">EduFund</h2>
         <p className="text-gray-600">Education crowdfunding platform</p>
+      </div>
+
+      {/* Add a button and display for user campaign IDs in the UI, e.g. after the main title */}
+      <div className="text-center mb-4">
+        <button
+          onClick={fetchUserCampaignIds}
+          disabled={loading || !isConnected}
+          className="bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg font-medium mb-2"
+        >
+          {loading ? 'Loading...' : 'Show My Campaigns'}
+        </button>
+        {userCampaignDetails.length > 0 && (
+          <div className="mt-4 overflow-x-auto">
+            <table className="min-w-full border border-gray-300 rounded-lg">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="px-4 py-2 border">ID</th>
+                  <th className="px-4 py-2 border">Student Name</th>
+                  <th className="px-4 py-2 border">Goal (ETH)</th>
+                  <th className="px-4 py-2 border">Raised (ETH)</th>
+                  <th className="px-4 py-2 border">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userCampaignDetails.map((c) => (
+                  <tr key={c.id} className="hover:bg-gray-50">
+                    <td className="px-4 py-2 border font-mono text-blue-700">{c.id}</td>
+                    <td className="px-4 py-2 border">{c.studentName}</td>
+                    <td className="px-4 py-2 border">{formatEther(c.goal)} ETH</td>
+                    <td className="px-4 py-2 border">{formatEther(c.raised)} ETH</td>
+                    <td className="px-4 py-2 border">
+                      <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${c.withdrawn ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                        {c.withdrawn ? 'Withdrawn' : 'Active'}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8">
