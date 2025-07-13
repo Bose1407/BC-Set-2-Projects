@@ -342,7 +342,7 @@ export function SupplyTrust() {
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-3">{stage.description}</td>
                     <td className="border border-gray-300 px-4 py-3 font-mono text-sm">
-                      {stage.handler.slice(0, 6)}...{stage.handler.slice(-4)}
+                      {stage.handler ? `${stage.handler.slice(0, 6)}...${stage.handler.slice(-4)}` : "N/A"}
                     </td>
                     <td className="border border-gray-300 px-4 py-3">
                       {formatTimestamp(stage.timestamp)}

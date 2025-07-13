@@ -553,7 +553,7 @@ export function EduFund() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Owner Address</label>
                 <p className="text-sm font-mono text-gray-600">
-                  {campaign.owner.slice(0, 6)}...{campaign.owner.slice(-4)}
+                  {campaign.owner ? `${campaign.owner.slice(0, 6)}...${campaign.owner.slice(-4)}` : "N/A"}
                 </p>
               </div>
               <div>
