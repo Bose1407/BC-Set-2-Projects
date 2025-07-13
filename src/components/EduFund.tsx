@@ -238,8 +238,8 @@ export function EduFund() {
           {loading ? 'Loading...' : 'Show My Campaigns'}
         </button>
         {userCampaignDetails.length > 0 && (
-          <div className="mt-4 overflow-x-auto">
-            <table className="min-w-full border border-gray-300 rounded-lg">
+          <div className="mt-4 w-full overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+            <table className="min-w-[600px] w-full text-sm text-left">
               <thead className="bg-gray-100">
                 <tr>
                   <th className="px-4 py-2 border">ID</th>
@@ -252,11 +252,11 @@ export function EduFund() {
               <tbody>
                 {userCampaignDetails.map((c) => (
                   <tr key={c.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-2 border font-mono text-blue-700">{c.id}</td>
-                    <td className="px-4 py-2 border">{c.studentName}</td>
-                    <td className="px-4 py-2 border">{formatEther(c.goal)} ETH</td>
-                    <td className="px-4 py-2 border">{formatEther(c.raised)} ETH</td>
-                    <td className="px-4 py-2 border">
+                    <td className="px-4 py-2 border font-mono text-blue-700 whitespace-nowrap">{c.id}</td>
+                    <td className="px-4 py-2 border whitespace-nowrap">{c.studentName}</td>
+                    <td className="px-4 py-2 border whitespace-nowrap">{formatEther(c.goal)} ETH</td>
+                    <td className="px-4 py-2 border whitespace-nowrap">{formatEther(c.raised)} ETH</td>
+                    <td className="px-4 py-2 border whitespace-nowrap">
                       <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${c.withdrawn ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
                         {c.withdrawn ? 'Withdrawn' : 'Active'}
                       </span>
@@ -269,9 +269,10 @@ export function EduFund() {
         )}
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      {/* Make main grid and cards responsive */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Create Campaign */}
-        <div className="bg-white p-6 rounded-xl shadow-lg">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-lg mb-6">
           <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
             <GraduationCap className="h-5 w-5 mr-2 text-blue-500" />
             Create Campaign
@@ -310,7 +311,7 @@ export function EduFund() {
         </div>
 
         {/* Donate */}
-        <div className="bg-white p-6 rounded-xl shadow-lg">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-lg mb-6">
           <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
             <Heart className="h-5 w-5 mr-2 text-red-500" />
             Donate to Campaign
@@ -342,7 +343,7 @@ export function EduFund() {
         </div>
 
         {/* Withdraw */}
-        <div className="bg-white p-6 rounded-xl shadow-lg">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-lg mb-6">
           <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
             <Wallet className="h-5 w-5 mr-2 text-green-500" />
             Withdraw Funds
@@ -366,7 +367,7 @@ export function EduFund() {
         </div>
 
         {/* View Campaign */}
-        <div className="bg-white p-6 rounded-xl shadow-lg">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-lg mt-6">
           <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
             <Eye className="h-5 w-5 mr-2 text-purple-500" />
             View Campaign
@@ -392,7 +393,7 @@ export function EduFund() {
 
       {/* Campaign Details */}
       {campaign && (
-        <div className="bg-white p-6 rounded-xl shadow-lg">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-lg mt-6">
           <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
             <DollarSign className="h-5 w-5 mr-2 text-green-500" />
             Campaign Details
@@ -401,7 +402,7 @@ export function EduFund() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Campaign ID</label>
             <p className="text-lg font-mono text-blue-700">{searchCampaignId}</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Student Name</label>
