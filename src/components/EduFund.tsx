@@ -544,6 +544,10 @@ export function EduFund() {
             <DollarSign className="h-5 w-5 mr-2 text-green-500" />
             Campaign Details
           </h3>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Campaign ID</label>
+            <p className="text-lg font-mono text-blue-700">{searchCampaignId}</p>
+          </div>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
